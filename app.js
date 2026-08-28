@@ -9,7 +9,7 @@ const DEFAULT_PRODUCTS = [
         title: "Lumina Aura Advanced Serum",
         category: "cosmetics",
         price: 899,
-        image: "assets/images/cosmetic_serum.jpg",
+        image: "./assets/images/cosmetic_serum.jpg",
         description: "Luxury hydrating regenerating serum with peptide glow complex. Gives instant glass skin shine.",
         tag: "Best Seller",
         custom: false
@@ -19,7 +19,7 @@ const DEFAULT_PRODUCTS = [
         title: "Royal Indian Bridal Mehandi",
         category: "mehandi",
         price: 3500,
-        image: "assets/images/mehandi_art.jpg",
+        image: "./assets/images/mehandi_art.jpg",
         description: "Intricate bridal henna design covering full hands & arms with peacock and mandala motifs. Booking available!",
         tag: "Bridal Special",
         custom: false
@@ -29,7 +29,7 @@ const DEFAULT_PRODUCTS = [
         title: "Enchanted Mini Clay Cottage",
         category: "clay",
         price: 999,
-        image: "assets/images/clay_craft.jpg",
+        image: "./assets/images/clay_craft.jpg",
         description: "Adorable handmade moulding clay fairy cottage with pastel mushrooms, bunny figurine, and flowers.",
         tag: "Handcrafted",
         custom: false
@@ -69,7 +69,7 @@ const DEFAULT_PRODUCTS = [
         title: "Luxury Ferrero Rocher & Rose Bouquet",
         category: "bouquet",
         price: 1499,
-        image: "assets/images/chocolate_bouquet.jpg",
+        image: "./assets/images/chocolate_bouquet.jpg",
         description: "Exquisite handmade chocolate bouquet arrangement with premium Ferrero Rocher chocolates, velvet red roses, and luxury ribbon wrap.",
         tag: "Bestselling Gift",
         custom: false
@@ -551,10 +551,10 @@ function initFashionShowcase() {
     if (!heroImg) return;
 
     const fashionImages = {
-        cosmetics: "assets/images/woman_cosmetics.jpg",
-        mehandi: "assets/images/woman_mehandi.jpg",
-        clay: "assets/images/woman_clay.jpg",
-        bouquet: "assets/images/chocolate_bouquet.jpg"
+        cosmetics: "./assets/images/woman_cosmetics.jpg",
+        mehandi: "./assets/images/woman_mehandi.jpg",
+        clay: "./assets/images/woman_clay.jpg",
+        bouquet: "./assets/images/chocolate_bouquet.jpg"
     };
 
     document.querySelectorAll(".model-btn").forEach(btn => {
