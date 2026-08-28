@@ -545,33 +545,28 @@ function escapeHtml(str) {
     return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 }
 
-// --- Realistic Fashion Woman Hero Showcase ---
+// --- Guaranteed Pure Real Human Model Motion Showcase ---
 function initFashionShowcase() {
-    const heroImg = document.getElementById("fashionHeroImg");
-    if (!heroImg) return;
+    const img = document.getElementById("pureHumanImg");
+    if (!img) return;
 
-    const fashionImages = {
-        cosmetics: "./assets/images/woman_cosmetics.jpg",
-        mehandi: "./assets/images/woman_mehandi.jpg",
-        clay: "./assets/images/woman_clay.jpg",
-        bouquet: "./assets/images/chocolate_bouquet.jpg"
-    };
+    const realHumanModels = [
+        "./assets/images/woman_cosmetics.jpg",
+        "./assets/images/woman_mehandi.jpg",
+        "./assets/images/woman_clay.jpg",
+        "./assets/images/chocolate_bouquet.jpg"
+    ];
 
-    document.querySelectorAll(".model-btn").forEach(btn => {
-        btn.addEventListener("click", () => {
-            document.querySelectorAll(".model-btn").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
+    let currentIndex = 0;
 
-            const type = btn.dataset.fashion;
-            if (fashionImages[type]) {
-                heroImg.style.opacity = "0";
-                setTimeout(() => {
-                    heroImg.src = fashionImages[type];
-                    heroImg.style.opacity = "1";
-                }, 200);
-            }
-        });
-    });
+    setInterval(() => {
+        currentIndex = (currentIndex + 1) % realHumanModels.length;
+        img.style.opacity = "0.2";
+        setTimeout(() => {
+            img.src = realHumanModels[currentIndex];
+            img.style.opacity = "1";
+        }, 400);
+    }, 4500);
 }
 
 function createParticles() {
