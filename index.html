@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glam with Vedu | Cosmetics, Mehandi Art & Moulding Clay Creations</title>
+    <meta name="description" content="Glam with Vedu - 3D Futuristic Showcase & Shop for Luxury Cosmetics, Custom Mehandi Art Designs, and Handmade Moulding Clay Crafts. Order directly via WhatsApp!">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Three.js CDN & GLTFLoader -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <!-- Canvas Confetti CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Animated Stars Canvas -->
+    <canvas id="bg-stars-canvas"></canvas>
+
+    <!-- Top Navigation Bar -->
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#" class="brand-logo">
+                <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+                <div class="brand-text">
+                    <span class="glam">GLAM</span> WITH <span class="vedu">VEDU</span>
+                    <span class="badge-3d">3D STUDIO</span>
+                </div>
+            </a>
+
+            <div class="nav-search">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search cosmetics, mehandi, clay art...">
+            </div>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#hero" class="nav-item active"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="#showcase" class="nav-item"><i class="fa-solid fa-shapes"></i> Showcase</a>
+                <a href="#feedback-section" class="nav-item"><i class="fa-solid fa-comments"></i> Reviews</a>
+                <a href="https://www.instagram.com/glamwith_vedu" target="_blank" rel="noopener noreferrer" class="btn-instagram-nav" title="Follow @glamwith_vedu on Instagram">
+                    <i class="fa-brands fa-instagram"></i> <span>@glamwith_vedu</span>
+                </a>
+                <button class="btn-add-product admin-only hidden" id="openAddModalBtn">
+                    <i class="fa-solid fa-plus"></i> Add Item
+                </button>
+                <button class="btn-owner-status admin-only hidden" id="exitAdminBtn" title="Owner Mode Active">
+                    <i class="fa-solid fa-crown"></i> Owner Mode <i class="fa-solid fa-right-from-bracket"></i>
+                </button>
+            </nav>
+
+            <button class="mobile-toggle" id="mobileMenuBtn" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section with 3D Canvas -->
+    <section id="hero" class="hero-section">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="pulse-dot"></span> Futuristic 3D Studio & Crafts
+            </div>
+            <h1 class="hero-title">
+                Beauty & Art Redefined in <span class="text-glow">High Fashion</span>
+            </h1>
+            <p class="hero-subtitle">
+                Explore handpicked luxury cosmetics, intricate custom mehandi designs, adorable moulding clay crafts, and handcrafted chocolate bouquets! Direct WhatsApp ordering & custom commissions!
+            </p>
+            
+            <div class="hero-ctas">
+                <a href="#showcase" class="btn-primary-glow">
+                    <i class="fa-solid fa-sparkles"></i> Explore Creations
+                </a>
+                <button class="btn-secondary-glass admin-only hidden" id="heroAddBtn">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Add Product / Design
+                </button>
+            </div>
+
+            <!-- Highlights Grid -->
+            <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Handmade & Custom</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Happy Clients</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">4.9 ★</span>
+                    <span class="stat-label">5-Star Feedback</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Realistic Fashion Woman Showcase Container -->
+        <div class="hero-fashion-wrapper">
+            <div class="canvas-badge">
+                <i class="fa-solid fa-sparkles"></i> High Fashion & Gift Showcase
+            </div>
+            <div class="fashion-image-container">
+                <img id="fashionHeroImg" src="assets/images/woman_cosmetics.jpg" alt="Realistic Fashion Model - Glam with Vedu" class="fashion-hero-img">
+                <div class="fashion-overlay-glow"></div>
+            </div>
+            <div class="model-controls">
+                <button class="model-btn active" data-fashion="cosmetics" title="Cosmetics Glam"><i class="fa-solid fa-wand-magic-sparkles"></i> Cosmetics Glam</button>
+                <button class="model-btn" data-fashion="mehandi" title="Bridal Mehandi Henna"><i class="fa-solid fa-hands-praying"></i> Mehandi Couture</button>
+                <button class="model-btn" data-fashion="clay" title="Clay Fashion Jewelry"><i class="fa-solid fa-gem"></i> Clay Fashion</button>
+                <button class="model-btn" data-fashion="bouquet" title="Chocolate Bouquets"><i class="fa-solid fa-gift"></i> Chocolate Bouquets</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Showcase Section -->
+    <section id="showcase" class="showcase-section">
+        <div class="section-header">
+            <h2 class="section-title">Exclusive <span class="text-glow">Collection</span></h2>
+            <p class="section-subtitle">Select a category or search for your favorite creation to place a direct order via WhatsApp</p>
+        </div>
+
+        <!-- Category Filters -->
+        <div class="category-tabs">
+            <button class="tab-btn active" data-category="all">
+                <i class="fa-solid fa-layer-group"></i> All Creations (<span id="count-all">0</span>)
+            </button>
+            <button class="tab-btn" data-category="cosmetics">
+                <i class="fa-solid fa-wand-magic-sparkles"></i> Cosmetics (<span id="count-cosmetics">0</span>)
+            </button>
+            <button class="tab-btn" data-category="mehandi">
+                <i class="fa-solid fa-hands-praying"></i> Mehandi Art (<span id="count-mehandi">0</span>)
+            </button>
+            <button class="tab-btn" data-category="clay">
+                <i class="fa-solid fa-palette"></i> Moulding Clay (<span id="count-clay">0</span>)
+            </button>
+            <button class="tab-btn" data-category="bouquet">
+                <i class="fa-solid fa-gift"></i> Chocolate Bouquets (<span id="count-bouquet">0</span>)
+            </button>
+        </div>
+
+        <!-- Dynamic Product Grid -->
+        <div class="product-grid" id="productGrid">
+            <!-- Dynamic JS Injected Cards -->
+        </div>
+
+        <!-- Empty state placeholder -->
+        <div class="empty-state hidden" id="emptyState">
+            <i class="fa-solid fa-box-open"></i>
+            <h3>No items found</h3>
+            <p>Select another category or search for items in Glam with Vedu showcase!</p>
+            <button class="btn-primary-glow admin-only hidden" id="emptyAddBtn">
+                <i class="fa-solid fa-plus"></i> Add Item Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Feedback & Reviews Section -->
+    <section id="feedback-section" class="feedback-section">
+        <div class="section-header">
+            <h2 class="section-title">Client <span class="text-glow">Feedback</span></h2>
+            <p class="section-subtitle">Read real reviews from cosmetics lovers, mehandi brides, and clay craft collectors!</p>
+        </div>
+
+        <div class="feedback-container">
+            <!-- Review Form Glass Box -->
+            <div class="feedback-form-box">
+                <h3><i class="fa-solid fa-pen-nib"></i> Leave Your Feedback</h3>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="fbName">Your Name</label>
+                        <input type="text" id="fbName" placeholder="e.g. Ananya Sharma" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fbCategory">Category Experienced</label>
+                        <select id="fbCategory" required>
+                            <option value="Cosmetics Client">Cosmetics Product</option>
+                            <option value="Mehandi Bride">Mehandi Art Design</option>
+                            <option value="Moulding Clay Buyer">Moulding Clay Craft</option>
+                            <option value="Chocolate Bouquet Buyer">Chocolate & Gift Bouquet</option>
+                            <option value="General Client">General Experience</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Rating</label>
+                        <div class="star-rating" id="starRating">
+                            <i class="fa-solid fa-star star active" data-value="1"></i>
+                            <i class="fa-solid fa-star star active" data-value="2"></i>
+                            <i class="fa-solid fa-star star active" data-value="3"></i>
+                            <i class="fa-solid fa-star star active" data-value="4"></i>
+                            <i class="fa-solid fa-star star active" data-value="5"></i>
+                        </div>
+                        <input type="hidden" id="fbRatingVal" value="5">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fbComment">Your Review & Experience</label>
+                        <textarea id="fbComment" rows="4" placeholder="Tell Vedu about your experience..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary-glow w-100">
+                        <i class="fa-solid fa-paper-plane"></i> Submit Feedback
+                    </button>
+                </form>
+            </div>
+
+            <!-- Feedback Cards List -->
+            <div class="feedback-list" id="feedbackList">
+                <!-- Dynamic Reviews Rendered Here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal: Add New Product/Design -->
+    <div class="modal-overlay hidden" id="addProductModal">
+        <div class="modal-glass">
+            <button class="modal-close" id="closeAddModalBtn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-circle-plus"></i> Add New Product / Design</h2>
+                <p>Add your Cosmetics item, Mehandi design, or Moulding Clay creation</p>
+            </div>
+            
+            <form id="addProductForm">
+                <div class="form-row">
+                    <div class="form-group flex-1">
+                        <label for="prodTitle">Item Title / Name *</label>
+                        <input type="text" id="prodTitle" placeholder="e.g. Glowing Aura Liquid Highlighter" required>
+                    </div>
+                    <div class="form-group flex-1">
+                        <label for="prodCategory">Category *</label>
+                        <select id="prodCategory" required>
+                            <option value="cosmetics">💄 Cosmetics Product</option>
+                            <option value="mehandi">🌿 Mehandi Art Design</option>
+                            <option value="clay">🎨 Moulding Clay Craft</option>
+                            <option value="bouquet">💐 Chocolate & Gift Bouquet</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group flex-1">
+                        <label for="prodPrice">Price (₹) *</label>
+                        <input type="number" id="prodPrice" placeholder="e.g. 499" min="0" required>
+                    </div>
+                    <div class="form-group flex-1">
+                        <label for="prodTag">Badge Tag (Optional)</label>
+                        <input type="text" id="prodTag" placeholder="e.g. Best Seller, Bridal Special, Custom">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Product Photo *</label>
+                    <div class="image-input-tabs">
+                        <label class="radio-label">
+                            <input type="radio" name="imageSource" value="file" checked> Upload Photo
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="imageSource" value="url"> Image URL Link
+                        </label>
+                    </div>
+
+                    <div id="fileUploadContainer" class="upload-dropzone">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <p>Click or drag image file here</p>
+                        <input type="file" id="prodImageFile" accept="image/*">
+                        <img id="filePreview" class="image-preview hidden" alt="Uploaded Preview">
+                    </div>
+
+                    <div id="urlInputContainer" class="form-group hidden">
+                        <input type="url" id="prodImageUrl" placeholder="https://images.unsplash.com/photo-...">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="prodDesc">Description & Customization Details *</label>
+                    <textarea id="prodDesc" rows="3" placeholder="Describe shades, mehandi coverage, or clay customization options..." required></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn-secondary-glass" id="cancelAddBtn">Cancel</button>
+                    <button type="submit" class="btn-primary-glow">
+                        <i class="fa-solid fa-plus-circle"></i> Save Creation
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: WhatsApp Number Settings -->
+    <div class="modal-overlay hidden" id="settingsModal">
+        <div class="modal-glass modal-sm">
+            <button class="modal-close" id="closeSettingsBtn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h2><i class="fa-brands fa-whatsapp"></i> WhatsApp Configuration</h2>
+                <p>Enter your WhatsApp phone number to receive orders & design inquiries directly!</p>
+            </div>
+            <form id="settingsForm">
+                <div class="form-group">
+                    <label for="waPhoneInput">WhatsApp Phone Number (With Country Code)</label>
+                    <input type="text" id="waPhoneInput" placeholder="919876543210" required>
+                    <small class="help-text">Example: 919876543210 (Country code 91 for India without '+' sign)</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-primary-glow w-100">
+                        <i class="fa-solid fa-check"></i> Save Number
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Owner Login PIN -->
+    <div class="modal-overlay hidden" id="adminModal">
+        <div class="modal-glass modal-sm">
+            <button class="modal-close" id="closeAdminModalBtn"><i class="fa-solid fa-xmark"></i></button>
+            <div class="modal-header">
+                <h2><i class="fa-solid fa-user-shield"></i> Owner Access</h2>
+                <p>Enter secret passcode to enable Add Product & management features</p>
+            </div>
+            <form id="adminForm">
+                <div class="form-group">
+                    <label for="adminPinInput">Owner Password</label>
+                    <input type="password" id="adminPinInput" placeholder="••••••••" autocomplete="current-password" required>
+                    <small class="help-text">Enter owner passcode to access Add Item controls.</small>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn-primary-glow w-100">
+                        <i class="fa-solid fa-key"></i> Unlock Owner Mode
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Lightbox for Image Zoom -->
+    <div class="lightbox-overlay hidden" id="lightboxModal">
+        <button class="lightbox-close" id="closeLightboxBtn"><i class="fa-solid fa-xmark"></i></button>
+        <img id="lightboxImg" src="" alt="Zoomed view">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <a href="#" class="brand-logo">
+                    <span class="logo-icon"><i class="fa-solid fa-gem"></i></span>
+                    <span class="glam">GLAM</span> WITH <span class="vedu">VEDU</span>
+                </a>
+                <p>Handmade luxury cosmetics, bespoke bridal & modern mehandi art, and cute customized moulding clay crafts.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#showcase">Showcase</a></li>
+                    <li><a href="#feedback-section">Reviews</a></li>
+                    <li><a href="#" id="footerAddBtn" class="admin-only hidden">Add Item</a></li>
+                    <li><a href="#" id="openAdminModalBtn" class="owner-login-link"><i class="fa-solid fa-lock"></i> Owner Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Direct Contact & Social</h4>
+                <p><i class="fa-brands fa-whatsapp"></i> WhatsApp Order System Active</p>
+                <p>
+                    <a href="https://www.instagram.com/glamwith_vedu" target="_blank" rel="noopener noreferrer" class="insta-footer-link">
+                        <i class="fa-brands fa-instagram"></i> Follow @glamwith_vedu
+                    </a>
+                </p>
+                <p><i class="fa-solid fa-heart"></i> Made for Vedu's Creations</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Glam with Vedu. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Main JavaScript Logic -->
+    <script src="app.js"></script>
+</body>
+</html>
